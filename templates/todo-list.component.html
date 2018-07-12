@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="center">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <input [(ngModel)]="todo.title"
+            id="input_text"
+            type="text"
+            length="140"
+            class="form-control add-todo"
+            placeholder="add-todo"
+            (focusout)="save()"
+          >
+          <button (click)="save()" class="btn btn-success pull-right add-todo">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="newtodo-list row" style="margin-top:10px;">
+      <div *ngFor="let newtodo of newtodos" class="col-sm-8 col-sm-offset-2">
+        <div [style.display]="!newtodo.hideElement ? 'inline':'none'">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <span *ngIf="!newtodo.isEdit" (click)="newtodo.isEdit=true" from="name">{{newtodo[0].title}}</span>
+              <input *ngIf="newtodo.isEdit"
+                (focusout)="newtodo.isEdit=false || update(newtodo[0].id, newtodo[0].title)"
+                [(ngModel)]="newtodo[0].title"
+                id="input_text"
+                type="text"
+                length="140"
+                style="border:none; width:70%"
+              >
+              <button (click)="delete(newtodo[0].id) || newtodo.hideElement=true"
+                type="button"
+                class="btn btn-success btn-circle pull-right"
+              >
+                <i class="glyphicon glyphicon-ok"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="col-sm-8 col-sm-offset-2">
+    <div class="todo-list row">
+      <div *ngFor="let todo of todos" class="col-sm-8 col-sm-offset-2">
+        <div [style.display]="!todo.hideElement ? 'inline':'none'">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <span *ngIf="!todo.isEdit" (click)="todo.isEdit=true" from="name">{{todo.title}}</span>
+              <input *ngIf="todo.isEdit"
+                (focusout)="todo.isEdit=false || update(todo.id, todo.title)"
+                [(ngModel)]="todo.title"
+                id="input_text"
+                type="text"
+                length="140"
+                style="border:none; width:70%"
+              >
+              <button (click)="delete(todo.id) || todo.hideElement=true"
+                type="button"
+                class="btn btn-success
+                btn-circle pull-right"
+              >
+                <i class="glyphicon glyphicon-ok"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
